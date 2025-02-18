@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saumya Chauhan | Developer & Creator</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0a192f;
+            --secondary: #64ffda;
+            --text: #8892b0;
+            --light-text: #ccd6f6;
+            --hover: #112240;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Calibre', 'Inter', sans-serif;
+        }
+
+        @keyframes gradient {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(100px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        body {
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .noise {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.95' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+            opacity: 0.05;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        header {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .profile-section {
+            position: relative;
+        }
+
+        .profile-img {
+            width: 250px;
+            height: 250px;
+            border-radius: 15px;
+            margin: 2rem auto;
+            position: relative;
+            overflow: hidden;
+            transform: rotate(-5deg);
+            transition: transform 0.3s ease;
+        }
+
+        .profile-img:hover {
+            transform: rotate(0deg);
+        }
+
+        .profile-img::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--secondary);
+            opacity: 0.2;
+            transition: opacity 0.3s ease;
+        }
+
+        .profile-img:hover::before {
+            opacity: 0;
+        }
+
+        h1 {
+            font-size: 4rem;
+            color: var(--light-text);
+            margin: 1rem 0;
+            position: relative;
+            display: inline-block;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background: var(--secondary);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        h1:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .tagline {
+            font-size: 1.5rem;
+            color: var(--secondary);
+            margin-bottom: 2rem;
+        }
+
+        .section {
+            margin: 8rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.5s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            color: var(--light-text);
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .section-title::before {
+            content: '';
+            display: inline-block;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+            margin-right: 1rem;
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: var(--hover);
+            padding: 2rem;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+            animation: slideUp 0.5s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background: var(--hover);
+            border-radius: 10px;
+            padding: 3rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            animation: slideUp 0.5s ease;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Optional: Add shadow for depth */
+            height: 350px;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), transparent);
+        }
+
+        .project-images {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+        }
+
+        .project-image {
+            width: 32%;
+            height: 120px; /* Placeholder height */
+            background: var(--light-text);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-weight: bold;
+        }
+
+        .achievements-list {
+            list-style: none;
+        }
+
+        .achievements-list li {
+            margin: 1rem 0;
+            padding: 1rem;
+            background: var(--hover);
+            border-radius: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .achievements-list li:hover {
+            transform: translateX(10px);
+        }
+
+        .interests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+        }
+
+        .interest-item {
+            text-align: center;
+            padding: 1rem;
+            background: var(--hover);
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .interest-item:hover {
+            background: var(--secondary);
+            color: var(--primary);
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-links a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: color 0.3s ease;
+        }
+
+        .contact-links a:hover {
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 3rem; }
+            .section { margin: 4rem 0; }
+            .project-grid { grid-template-columns: 1fr; }
+            .project-image { height: 80px; } /* Adjust height for smaller screens */
+        }
+
+    </style>
+</head>
+<body>
+    <div class="noise"></div>
+    
+    <header>
+        <div class="profile-section">
+            <img src="images/pf.png" alt="Saumya Chauhan" class="profile-img">
+            <h1>Saumya Chauhan</h1>
+            <p class="tagline">Learning, Growing, Creating | Strengthening Problem Solving & Web Development Skills</p>
+            <div class="contact-links">
+                <a href="mailto:saumyachauhan73@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/saumyachauhan9078"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/ChauhanSaumya"><i class="fab fa-github"></i></a>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section class="section" id="about">
+            <h2 class="section-title">About Me</h2>
+            <p>I am a motivated and passionate Computer Science student at Banasthali Vidyapith, constantly seeking opportunities to apply my skills and knowledge to real-world projects. With a decent foundation in technology, I blend creativity with technical expertise to develop innovative solutions. My journey in the tech field is driven by a deep curiosity and a love for problem-solving, whether it's through building dynamic web applications or exploring new programming paradigms. I thrive in environments that challenge me to learn and adapt quickly, and I am always eager to expand my horizons in the ever-evolving world of technology.</p>
+        </section>
+
+        <section class="section" id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <h3>Core Languages</h3>
+                    <p>Learning and practicing C/C++ and Python with a strong focus on improving data structures and algorithms skills through regular problem-solving.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Web Technologies</h3>
+                    <p>Creating responsive and interactive experiences with HTML, CSS, and JavaScript.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Database Management</h3>
+                    <p>Experience with MySQL and database design principles.</p>
+                </div>
+                <div class="skill-card">
+                    <h3>Development Tools</h3>
+                    <p>Skilled in Git version control and Visual Studio Code ecosystem.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="projects">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>ClubHub</h3>
+                    <p>A comprehensive platform revolutionizing campus club management with modern web technologies.</p>
+                    <div class="project-images">
+                        <img src="images/clubhub1.png" alt="clubhub Screenshot 1" class="project-image">
+                        <img src="images/clubhub2.png" alt="clubhub Screenshot 2" class="project-image">
+                        <img src="images/clubhub3.png" alt="clubhub Screenshot 3" class="project-image">
+                    </div>
+                    <a href="https://github.com/ChauhanSaumya/ClubHub">Explore Project →</a>
+                </div>
+                <div class="project-card">
+                    <h3>Smart DMS</h3>
+                    <p>An intelligent document management system with automated categorization and lifecycle management.</p>
+                    <div class="project-images">
+                        <img src="images/dms1.png" alt="dms Screenshot 1" class="project-image">
+                        <img src="images/dms2.png" alt="dms Screenshot 2" class="project-image">
+                        <img src="images/dms3.png" alt="dms Screenshot 3" class="project-image">
+                    </div>
+                    <a href="https://github.com/ChauhanSaumya/Automated_document_management_system">View Details →</a>
+                </div>
+                <div class="project-card">
+                    <h3>Mystical Realms</h3>
+                    <p>An immersive text-based adventure game featuring dynamic storytelling and player choices.</p>
+                    <div class="project-images">
+                        <img src="images/adventure1.png" alt="adventure Screenshot 1" class="project-image">
+                        <img src="images/adventure2.png" alt="adventure Screenshot 2" class="project-image">
+                        <img src="images/adventure3.png" alt="adventure Screenshot 3" class="project-image">
+                    </div>
+                    <a href="https://github.com/ChauhanSaumya/Mystical_adventure">Play Now →</a>
+                </div>
+                <div class="project-card">
+                    <h3>Netflix Clone</h3>
+                    <div class="project-images">
+                        <img src="images/netflix1.png" alt="netflix Screenshot 1" class="project-image">
+                        <img src="images/netflix2.png" alt="netflix Screenshot 2" class="project-image">
+                        <img src="images/netflix3.png" alt="netflix Screenshot 3" class="project-image">
+                    </div>
+                    <a href="https://github.com/ChauhanSaumya/Mystical_adventure">Play Now →</a>
+                </div>
+            </div>
+        </section>
+
+        <section class="section" id="achievements">
+            <h2 class="section-title">Milestones</h2>
+            <ul class="achievements-list">
+                <li>🏆 Led Team TermiGuard to secure 3rd position in University Ideathon</li>
+                <li>🌟 Champion of 'Laser Wing' tech fest competition</li>
+                <li>📚 Maintaining exceptional academic performance with 8.92 CGPA</li>
+                <li>🎯 Active contributor to university's tech community through OSCODE</li>
+            </ul>
+        </section>
+
+        <section class="section" id="interests">
+            <h2 class="section-title">Beyond Code</h2>
+            <div class="interests-grid">
+                <div class="interest-item">
+                    <i class="fas fa-book"></i>
+                    <p>Book Enthusiast</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-puzzle-piece"></i>
+                    <p>Problem Solver</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-guitar"></i>
+                    <p>Guitar Hobbyist</p>
+                </div>
+                <div class="interest-item">
+                    <i class="fas fa-spa"></i>
+                    <p>Skincare Lover</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Intersection Observer for scroll animations
+        const sections = document.querySelectorAll('.section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        sections.forEach(section => observer.observe(section));
+    </script>
+</body>
+</html>
