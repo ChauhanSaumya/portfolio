@@ -217,6 +217,20 @@
             height: 5px;
             background: linear-gradient(90deg, var(--secondary), transparent);
         }
+        .project-card a {
+           color: var(--secondary);
+           text-decoration: none;
+           font-weight: bold;
+           display: inline-block;
+           margin-top: 1rem;
+          transition: color 0.3s ease; 
+       }
+
+      .project-card a:hover {
+          color: var(--light-text); 
+          text-decoration: underline;
+       }
+
 
         .project-images {
             display: flex;
@@ -377,6 +391,7 @@
                 </div>
                 <div class="project-card">
                     <h3>Netflix Clone</h3>
+                    <p>Practice project:created while learning HTML and CSS.It replicates the layout and design of Netflix.It includes elements such as movie thumbnails,navigation bar and a clean user-friendly interface.</p>
                     <div class="project-images">
                         <img src="netflix1.png" alt="netflix Screenshot 1" class="project-image">
                         <img src="netflix2.png" alt="netflix Screenshot 2" class="project-image">
